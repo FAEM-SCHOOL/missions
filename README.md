@@ -6,3 +6,5 @@
 **m001** - CLI для каталога товаров
 
 Неразобранные задачи - https://www.notion.so/otari/874a724295da4149bc01453e322ba925
+
+testing pulling 
