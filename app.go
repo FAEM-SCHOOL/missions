@@ -30,7 +30,6 @@ func main() {
 	config := readConfigs()
 	goods := readGoods(config.DefaultFile)
 
-
 	if argLength > 1 {
 		command := args[1]
 
