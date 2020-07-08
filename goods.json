@@ -1,1 +1,6 @@
-[{"id":0,"name":"aefsg","producer":"jthe\\w","price":4321,"count":1234},{"id":1,"name":"wqwqwr","producer":"kyuty","price":6789,"count":3456},{"id":2,"name":"gfdsdfgh","producer":"poiuyghjk","price":1234567,"count":9854},{"id":3,"name":"yghbvc","producer":"olkjwzs","price":9876,"count":354556},{"id":4,"name":"jhgfvb","producer":"point","price":987776,"count":65}]
+[{"id":0,"name":"Телефон Sony ZA2","producer":"Sony inc.","price":24000,"count":124},
+{"id":1,"name":"Утюг Bosch e23-c","producer":"Bosch","price":7999,"count":56},
+{"id":2,"name":"Кресло Bruno BC3","producer":"Bruno","price":14999,"count":21},
+{"id":3,"name":"Модем ASUS RTN-3N","producer":"ASUS","price":2499,"count":16},
+{"id":4,"name":"Ноутбук Acer Nitro 5","producer":"Acer","price":54999,"count":32},
+{"id":5,"name":"Телевизор Harper RST7","producer":"Harper","price":63459,"count":5}]

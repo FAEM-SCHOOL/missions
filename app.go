@@ -11,6 +11,7 @@ import (
 	"strings"
 )
 
+/*Структура хранящая данные о товаре в базе*/
 type Good struct {
 	Id       int    `json:"id"`
 	Name     string `json:"name"`
@@ -18,6 +19,7 @@ type Good struct {
 	Price    int    `json:"price"`
 	Count    int    `json:"count"`
 }
+
 
 type Config struct {
 	DefaultFile string `json:"default_file"`
@@ -33,11 +35,13 @@ func main() {
 	if argLength > 1 {
 		command := args[1]
 
+		//Определение нового файла конфигурации товаров базы
 		if strings.Compare(command, "-f") == 0 {
 			config.DefaultFile = args[2]
 			saveConfigs(config)
 		}
 
+		//Ввод нового товара в база
 		if strings.Compare(command, "add") == 0 {
 			var err error
 			good := Good{}
@@ -77,6 +81,7 @@ func main() {
 			fmt.Println("appended good: ", good)
 		}
 
+		//Редактирование товаров в базе
 		if strings.Compare(command, "edit") == 0 {
 			index := findIndexByID(goods, args[2])
 			fmt.Println("Редактировать поле:\n1. Название\n2. Производитель\n3. Цена\n4. Количество")
@@ -114,6 +119,7 @@ func main() {
 			saveGoods(goods, config.DefaultFile)
 		}
 
+		//Удаление товаров в базе
 		if strings.Compare(command, "del") == 0 {
 			switch len(args) {
 			case 3:
@@ -142,6 +148,7 @@ func main() {
 			}
 		}
 
+		//Вывод товаров базы на экран
 		if strings.Compare(command, "view") == 0 {
 			switch len(args) {
 			case 3:
@@ -182,7 +189,7 @@ func main() {
 }
 
 
-
+//Замена файла конфигурации на введенный пользователем
 func saveConfigs(config *Config) {
 	goodsJson, err := json.Marshal(config)
 	if err != nil {
@@ -195,6 +202,7 @@ func saveConfigs(config *Config) {
 	}
 }
 
+//Считывание файла конфигурации в программу
 func readConfigs() *Config {
 	bytes, _ := ioutil.ReadFile("config.json")
 	config := Config{}
@@ -202,6 +210,7 @@ func readConfigs() *Config {
 	return &config
 }
 
+//Сохранение базы в файл конфигурации
 func saveGoods(goods []Good, filename string) {
 	goodsJson, err := json.Marshal(goods)
 	if err != nil {
@@ -213,7 +222,7 @@ func saveGoods(goods []Good, filename string) {
 		log.Fatal("Cannot write data to file", err)
 	}
 }
-
+//Считывание данных из файла конфигурации в программу
 func readGoods(filename string) []Good {
 	bytes, _ := ioutil.ReadFile(filename)
 	var products []Good
@@ -221,6 +230,7 @@ func readGoods(filename string) []Good {
 	return products
 }
 
+//Генерация нового ID
 func nextID(goods []Good) int {
 	maxID := -1
 	for i := 0; i < len(goods); i++ {
@@ -232,6 +242,7 @@ func nextID(goods []Good) int {
 	return maxID
 }
 
+//Нахождение индекса товара по ID/
 func findIndexByID(goods []Good, id string) int {
 	id_, _ := strconv.Atoi(id)
 	for i := 0; i < len(goods); i++ {
