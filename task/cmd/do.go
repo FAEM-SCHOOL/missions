@@ -35,22 +35,23 @@ to quickly create a Cobra application.`,
 		tasks := ReadJsonFile("tasks.json")
 
 		t := time.Now()
-		date := t.Format("01-02-2006")
+		var date string
+		var task string
 
-		task, _ := cmd.Flags().GetString("today")
-
-		if task != ""{
-			date = t.Format("01-02-2006")
-		} else {
+		if len(args) > 1{
 			date = args[1]
 			task = args[0]
+		}else{
+			date = t.Format("01-02-2006")
+			task = args[0]
 		}
+
 
 		for i,  v := range tasks{
 			if i == date{
 				for e := 0; e < len(v); e++ {
 					if (v[e].Name == task) {
-						v[e].IsComplete = "Complete"
+						v[e].IsComplete = "!!Выполнено!!"
 					}
 				}
 			}

@@ -44,7 +44,7 @@ to quickly create a Cobra application.`,
 		//Create a new task
 		var newTask Task
 		newTask.Name = args[0]
-		newTask.IsComplete = "Incomplete"
+		newTask.IsComplete = "Выполняется"
 
 		//Add a task to the map
 		t := time.Now()

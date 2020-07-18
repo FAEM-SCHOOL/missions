@@ -1,28 +1,18 @@
 {
  "07-18-2020": [
   {
-   "Name": "Go to fix",
-   "IsComplete": "Incomplete"
+   "Name": "Поиграть с собакой",
+   "IsComplete": "!!Выполнено!!"
   },
   {
-   "Name": "katana",
-   "IsComplete": "Incomplete"
-  },
-  {
-   "Name": "Newbee",
-   "IsComplete": "Incomplete"
+   "Name": "Выполнить ДЗ",
+   "IsComplete": "Выполняется"
   }
  ],
- "07-20-2020": [
+ "07-25-2020": [
   {
-   "Name": "B-day",
-   "IsComplete": "Complete"
-  }
- ],
- "07-23-2020": [
-  {
-   "Name": "kunai",
-   "IsComplete": "Incomplete"
+   "Name": "Пойти на праздник",
+   "IsComplete": "Выполняется"
   }
  ]
 }
