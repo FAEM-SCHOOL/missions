@@ -16,6 +16,7 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"time"
 )
@@ -46,13 +47,27 @@ to quickly create a Cobra application.`,
 			task = args[0]
 		}
 
+		if(!TaskExist(tasks, task, date) && !DateExist(tasks, date)) {
+			fmt.Println("Такой задачи и дня нет")
 
-		for i,  v := range tasks{
-			if i == date{
-				for e := 0; e < len(v); e++ {
-					if (v[e].Name == task) {
-						v[e].IsComplete = "!!Выполнено!!"
+		}else{
+			if !DateExist(tasks,date) {
+				fmt.Println("Такого дня нет")
+			}else {
+				if !TaskExist(tasks, task, date) {
+					fmt.Println("Такой задачи нет")
+				} else{
+					for i,  v := range tasks{
+						if i == date{
+							for e := 0; e < len(v); e++ {
+								if (v[e].Name == task) {
+									v[e].IsComplete = "!!Выполнено!!"
+								}
+							}
+						}
 					}
+
+
 				}
 			}
 		}
@@ -76,5 +91,4 @@ func init() {
 	// is called directly, e.g.:
 	// doCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-	doCmd.Flags().StringP("today", "t", "", "Marks tasks for today")
 }
