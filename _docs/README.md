@@ -1,10 +1,8 @@
-# Документация и полезные ссылки
+# Добро пожаловать
 
-## Linux
+В этом репозитории назодится вся необходимая информация по документации и задачам
 
-* Курс подготовки к сертификации [LPI Linux Essentials](https://linuxacademy.com/course/lpi-linux-essentials-certification/)
+**docs** - документация и полезные ссылки
+**m001** - CLI для каталога товаров
 
-## Golang
-
-* [TOUR OF GO](https://tour.golang.org/welcome/1) - MUST HAVE!!!
-* [Effective Go](https://golang.org/doc/effective_go.html) - эффективный GO. Правила оформления кода 
+Неразобранные задачи - https://www.notion.so/otari/874a724295da4149bc01453e322ba925
