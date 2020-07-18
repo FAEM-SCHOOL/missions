@@ -32,6 +32,36 @@ type Task struct {
 	IsComplete string
 }
 
+func SearchTaskIndex(tasks map[string][]Task, name string, day string) int  {
+	for i := 0; i < len(tasks[day]); i++{
+		if tasks[day][i].Name == name{
+			return  i
+		}
+	}
+	return 0
+}
+
+func DateExist(tasks map[string][]Task, date string) bool  {
+	for i, _ := range tasks{
+		if i == date{
+			return true
+		}
+	}
+	return false
+}
+
+func TaskExist(tasks map[string][]Task, name_task string, day string) bool{
+	for i, v := range tasks{
+		if day == i {
+			for e := 0; e < len(v); e++ {
+				if v[e].Name == name_task {
+					return true
+				}
+			}
+		}
+	}
+	return false
+}
 
 func ReadJsonFile(name string) map[string][]Task {
 	data, err := ioutil.ReadFile(name)

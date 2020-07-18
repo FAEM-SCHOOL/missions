@@ -93,6 +93,7 @@ to quickly create a Cobra application.`,
 				}
 			}
 		}
+
 		//Output of tasks for today
 		if show == "today" {
 			for i, v := range tasks {
@@ -106,12 +107,19 @@ to quickly create a Cobra application.`,
 		}
 
 		//Output of tasks for the specified day
-		for i, v := range tasks {
-			if i == show {
-				fmt.Println(show)
-				for e := 0; e < len(v); e++ {
-					fmt.Println("  ", v[e].Name, "-->", v[e].IsComplete)
+		if len(args) != 0 {
+			if DateExist(tasks, show) {
+
+				for i, v := range tasks {
+					if i == show {
+						fmt.Println(show)
+						for e := 0; e < len(v); e++ {
+							fmt.Println("  ", v[e].Name, "-->", v[e].IsComplete)
+						}
 					}
+				}
+			} else {
+				fmt.Println("Такой даты не сущетсвует")
 			}
 		}
 	},

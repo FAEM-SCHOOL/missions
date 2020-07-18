@@ -42,8 +42,8 @@ to quickly create a Cobra application.`,
 		if task != ""{
 			date = t.Format("01-02-2006")
 		} else {
-			date = args[0]
-			task = args[1]
+			date = args[1]
+			task = args[0]
 		}
 
 		for i,  v := range tasks{

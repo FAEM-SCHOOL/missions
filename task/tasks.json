@@ -1,7 +1,27 @@
 {
  "07-18-2020": [
   {
-   "Name": "New task",
+   "Name": "Go to fix",
+   "IsComplete": "Incomplete"
+  },
+  {
+   "Name": "katana",
+   "IsComplete": "Incomplete"
+  },
+  {
+   "Name": "Newbee",
+   "IsComplete": "Incomplete"
+  }
+ ],
+ "07-20-2020": [
+  {
+   "Name": "B-day",
+   "IsComplete": "Complete"
+  }
+ ],
+ "07-23-2020": [
+  {
+   "Name": "kunai",
    "IsComplete": "Incomplete"
   }
  ]

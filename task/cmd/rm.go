@@ -21,6 +21,7 @@ import (
 	"time"
 )
 
+
 // rmCmd represents the rm command
 var rmCmd = &cobra.Command{
 	Use:   "rm",
@@ -35,59 +36,58 @@ to quickly create a Cobra application.`,
 
 		tasks := ReadJsonFile("tasks.json")
 
-		t := time.Now()
 
-		var date string
-		var task string
+		task, _ := cmd.Flags().GetString("today")
+		del_day, _ := cmd.Flags().GetString("day")
 
-		today, _ := cmd.Flags().GetString("today")
-		day, _ := cmd.Flags().GetString("day")
+		var day string
+		var del_task string
 
+		//Check input
+		if len(args) > 1 {
+			day = args[1]
+			del_task = args[0]
 
-		if day != "" {
-			flag := false
-			for i, _ := range  tasks{
-				if(i == day){
-					flag = true
-				}
-			}
-
-			if flag{
-				delete(tasks, day)
+			if !DateExist(tasks,day){
+				fmt.Println("Такого дня не сущетсвует")
+				return
 			}else {
-				fmt.Println("Такого дня нет")
-			}
-
-		} else{
-
-			if len(args) == 0 {
-				date = t.Format("01-02-2006")
-				task = today
-			} else {
-				date = args[0]
-				task = args[1]
-			}
-
-			var index int
-			flag := false
-			for i := 0; i < len(tasks[date]); i++ {
-				if tasks[date][i].Name == task {
-					index = i;
-					flag = true
+				if(DateExist(tasks, day) && !TaskExist(tasks, del_task, day)){
+					fmt.Println("В этот день такой задачи не существует")
+					return
 				}
 			}
-			if (flag) {
-				slice := tasks[date]
-				slice = append(slice[:index], slice[index+1:]...)
-				tasks[date] = slice
-				if len(tasks[date]) == 0 {
-					delete(tasks, date)
+		}else{
+			if del_day != ""{
+
+				if(!DateExist(tasks, del_day)){
+					fmt.Println("Такого дня не существует")
+					return
+				}else {
+					delete(tasks, del_day)
+					WriteJsonFile("tasks.json", tasks)
+					return
 				}
-			} else {
-				fmt.Println("Такой задачи нет")
+			}
+
+			if task != ""{
+				day = time.Now().Format("01-02-2006")
+				del_task = task
+				if !TaskExist(tasks, del_task, day) {
+					fmt.Println("Такой задачи нет")
+					return
+				}
 			}
 		}
 
+		index := SearchTaskIndex(tasks, del_task, day)
+		if len(tasks[day]) - 1 == 0{
+			delete(tasks, day)
+		}else {
+			slice := tasks[day]
+			slice = append(slice[:index], slice[index+1:]...)
+			tasks[day] = slice
+		}
 
 		WriteJsonFile("tasks.json", tasks)
 	},
