@@ -1,15 +1,7 @@
 {
- "Tasks": [
+ "07-18-2020": [
   {
-   "Name": "Go To Hell",
-   "IsComplete": "Complete"
-  },
-  {
-   "Name": "go to office",
-   "IsComplete": "Incomplete"
-  },
-  {
-   "Name": "Make a magic stick",
+   "Name": "New task",
    "IsComplete": "Incomplete"
   }
  ]

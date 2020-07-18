@@ -16,13 +16,50 @@ limitations under the License.
 package cmd
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/spf13/cobra"
+	"io/ioutil"
+	"log"
 	"os"
 
 	homedir "github.com/mitchellh/go-homedir"
 	"github.com/spf13/viper"
 )
+
+type Task struct {
+	Name string
+	IsComplete string
+}
+
+
+func ReadJsonFile(name string) map[string][]Task {
+	data, err := ioutil.ReadFile(name)
+	if err != nil {
+		log.Fatal("Cannot load settings:", err)
+	}
+
+	var tasks map[string][]Task
+	err = json.Unmarshal(data, &tasks)
+	if err != nil {
+		log.Fatal("Invalid settings format:", err)
+	}
+
+	return tasks
+}
+
+func WriteJsonFile(name string, tasks map[string][]Task)  {
+	data, err := json.MarshalIndent(&tasks, "", " ")
+	if err != nil{
+		log.Fatal("JSON marshaling failed:", err)
+	}
+
+	err = ioutil.WriteFile("tasks.json", data, 0)
+	if err != nil {
+		log.Fatal("Cannot write updated settings file:", err)
+	}
+}
+
 
 var cfgFile string
 

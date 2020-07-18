@@ -1,12 +1,9 @@
 /*
 Copyright © 2020 NAME HERE <EMAIL ADDRESS>
-
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
-
     http://www.apache.org/licenses/LICENSE-2.0
-
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -16,19 +13,17 @@ limitations under the License.
 package cmd
 
 import (
-	"encoding/json"
 	"github.com/spf13/cobra"
-	"io/ioutil"
-	"log"
+	"time"
 )
 
-type Task struct {
-	Name string
-	IsComplete string
-}
-
-type ListTask struct {
-	Tasks []Task
+func IsKeyExist(Map map[string][]Task, key string) bool  {
+	for i, _ := range Map{
+		if i == key{
+			return true
+		}
+	}
+	return  false
 }
 
 // addCmd represents the add command
@@ -37,37 +32,31 @@ var addCmd = &cobra.Command{
 	Short: "Add a new task to our list",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
-
 Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
+    Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
-		data, err := ioutil.ReadFile("tasks.json")
-		if err != nil {
-			log.Fatal("Cannot load settings:", err)
-			}
 
-			var tasks ListTask
-			err = json.Unmarshal(data, &tasks)
-			if err != nil {
-			log.Fatal("Invalid settings format:", err)
-			}
+		tasks := ReadJsonFile("tasks.json")
 
-			var newTask Task
-			newTask.Name = args[0]
-			newTask.IsComplete = "Incomplete"
+		//Create a new task
+		var newTask Task
+		newTask.Name = args[0]
+		newTask.IsComplete = "Incomplete"
 
-			tasks.Tasks = append(tasks.Tasks, newTask)
+		//Add a task to the map
+		t := time.Now()
+		var date string
+		if len(args) == 1 {
+			date = t.Format("01-02-2006")
+		} else{
+			date = args[1]
+		}
 
-			data, err = json.MarshalIndent(&tasks, "", " ")
-			if err != nil{
-				log.Fatal("JSON marshaling failed:", err)
-			}
+		tasks[date] = append(tasks[date], newTask)
 
-			err = ioutil.WriteFile("tasks.json", data, 0)
-			if err != nil {
-				log.Fatal("Cannot write updated settings file:", err)
-			}
+		WriteJsonFile("tasks.json", tasks)
 	},
 }
 

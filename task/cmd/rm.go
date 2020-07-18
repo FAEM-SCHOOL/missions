@@ -16,14 +16,15 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
 	"github.com/spf13/cobra"
 	"time"
 )
 
-// doCmd represents the do command
-var doCmd = &cobra.Command{
-	Use:   "do",
-	Short: "Marks a task complete ",
+// rmCmd represents the rm command
+var rmCmd = &cobra.Command{
+	Use:   "rm",
+	Short: "Delete task or day",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -35,45 +36,77 @@ to quickly create a Cobra application.`,
 		tasks := ReadJsonFile("tasks.json")
 
 		t := time.Now()
-		date := t.Format("01-02-2006")
 
-		task, _ := cmd.Flags().GetString("today")
+		var date string
+		var task string
 
-		if task != ""{
-			date = t.Format("01-02-2006")
-		} else {
-			date = args[0]
-			task = args[1]
-		}
+		today, _ := cmd.Flags().GetString("today")
+		day, _ := cmd.Flags().GetString("day")
 
-		for i,  v := range tasks{
-			if i == date{
-				for e := 0; e < len(v); e++ {
-					if (v[e].Name == task) {
-						v[e].IsComplete = "Complete"
-					}
+
+		if day != "" {
+			flag := false
+			for i, _ := range  tasks{
+				if(i == day){
+					flag = true
 				}
 			}
+
+			if flag{
+				delete(tasks, day)
+			}else {
+				fmt.Println("Такого дня нет")
+			}
+
+		} else{
+
+			if len(args) == 0 {
+				date = t.Format("01-02-2006")
+				task = today
+			} else {
+				date = args[0]
+				task = args[1]
+			}
+
+			var index int
+			flag := false
+			for i := 0; i < len(tasks[date]); i++ {
+				if tasks[date][i].Name == task {
+					index = i;
+					flag = true
+				}
+			}
+			if (flag) {
+				slice := tasks[date]
+				slice = append(slice[:index], slice[index+1:]...)
+				tasks[date] = slice
+				if len(tasks[date]) == 0 {
+					delete(tasks, date)
+				}
+			} else {
+				fmt.Println("Такой задачи нет")
+			}
 		}
+
 
 		WriteJsonFile("tasks.json", tasks)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(doCmd)
+	rootCmd.AddCommand(rmCmd)
 
 	// Here you will define your flags and configuration settings.
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	// doCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	//doCmd.Flags().StringP("do", "d", "", "Marks the tasks completed")
+	// rmCmd.PersistentFlags().String("foo", "", "A help for foo")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
-	// doCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// rmCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 
-	doCmd.Flags().StringP("today", "t", "", "Marks tasks for today")
+	rmCmd.Flags().StringP("today", "t", "", "Delete task in for today")
+	rmCmd.Flags().StringP("day", "d", "", "Delete a specific day")
+
 }
