@@ -1,4 +1,4 @@
-# FAEM Practice - 2 (Родион / @jbulters123)
+# FAEM Practice - 1 (Родион / @jbulters123)
 
 Данная программ является тестированием.
 
