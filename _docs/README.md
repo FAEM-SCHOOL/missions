@@ -17,6 +17,8 @@
 
 * [Серия видеоуроков по Git для новичков](https://habr.com/ru/post/322424/)
 * [Курс по основам Git](https://ru.hexlet.io/courses/git_base) + тесты
+* [МАКСИМАЛЬНО ПОЛНО ПОЛНЫЙ КУРС ПО GIT](https://www.youtube.com/watch?v=QkY8lXZuiqQ&list=PLDyvV36pndZHkDRik6kKF6gSb0N0W995h)
 
 ## Прочее
 * [Примеры заданий](https://www.notion.so/874a724295da4149bc01453e322ba925)
+* [Golang vs. Python — Что выбрать в 2020?](https://python-scripts.com/golang-vs-python)
