@@ -1,6 +1,12 @@
 # Default ignored files
+/Task-Manager-Web/.idea/
+/Task-Manager-Web/pages/.idea/
 /shelf/
-/workspace.xml
+/.idea/workspace.xml
+/misc.xml
+/modules.xml
+/Task Manager Web.iml
+/vcs.xml
 # Datasource local storage ignored files
 /dataSources/
 /dataSources.local.xml

@@ -14,14 +14,16 @@
             text-align:center;
             padding: 10px;
         }
-        html, body{
+        body{
             margin: 0;
             padding: 0;
         }
         header{
+            margin: 0;
+            padding: 0;
             background: #8ecad5;
-            width: 100%;
-            height: 90px;
+            display: block;
+            height: 100px;
         }
         #header{
             color: #46606a;
@@ -32,26 +34,26 @@
 </head>
 <body>
 <header>
-    <p id="header"><a href="http://localhost{{.Port}}/index.html">Выход</a> </p>
+    <p id="header"><a href="http://localhost{{.Port}}/exit.html">Выход</a> </p>
     <p id="header">Login: {{.Login}}</p>
     <p id="header">ID: {{.ID}}</p>
 </header>
 
 <div id="left">
  {{range .Tasks}}
-     <p>{{.ID_task}} {{.Date}} {{.Content}}</p>
+     <p>{{.ID_task}}: {{.Date}} {{.Content}}</p>
     {{end}}
 </div>
 
 <form method="POST">
     <input type="hidden" value="add" name="post">
-    <input type="text" value="yyyy-mm-dd task" name="task">
-    <input type="submit" value="отправить">
+    <input type="text" placeholder="YYYY-MM-DD task" name="task">
+    <input type="submit" value="Add">
 </form>
 <form method="POST">
     <input type="hidden" value="delete" name="post">
-    <input type="text" value="id" name="delete">
-    <input type="submit" value="Удалить">
+    <input type="text" placeholder="ID" name="delete">
+    <input type="submit" value="Delete">
 </form>
 
 

@@ -13,9 +13,23 @@ import (
 
 var connStr = "user=zaur password=bober dbname=zaur sslmode=disable"
 var db, _= sql.Open("postgres", connStr)
-var port = ":5678"
+const port = ":5678"
 var user User
 
+func main()  {
+
+	http.HandleFunc("/", indexPage)
+	http.HandleFunc("/registration.html", registrationPage)
+	http.HandleFunc("/personal_account.html", personal_accountPage)
+	http.HandleFunc("/exit.html", exitPage)
+
+	fmt.Println("Server start on" + port)
+	if err := http.ListenAndServe(port, nil); err != nil{
+		log.Fatal("Listen server", err)
+	}
+}
+
+//Structs
 type Task struct {
 	ID_user int
 	ID_task int
@@ -31,6 +45,7 @@ type User struct {
 	Tasks []Task
 }
 
+//Helper functions
 func GetUser(login string) User {
 
 	user := User{}
@@ -119,19 +134,13 @@ func ParsePage(path string, ) *template.Template {
 	return templ
 }
 
-func main()  {
-
-	http.HandleFunc("/", indexPage)
-	http.HandleFunc("/registration.html", registrationPage)
-	http.HandleFunc("/personal_account.html", personal_accountPage)
-
-	fmt.Println("Server start on" + port)
-	if err := http.ListenAndServe(port, nil); err != nil{
-		log.Fatal("Listen server", err)
-	}
-}
-
+//Pages
 func indexPage(w http.ResponseWriter, r *http.Request){
+
+	if user.Login != ""{
+		Redirect("personal_account.html", w)
+	}
+
 	templ := ParsePage("pages/index.html")
 	templ.Execute(w, port)
 
@@ -164,14 +173,20 @@ func registrationPage(w http.ResponseWriter, r *http.Request){
 		}
 
 		Login := r.FormValue("login")
-
 		if UserIsExist(Login){
-			fmt.Println("exist")
+			templ := ParsePage("scripts/user_exist.html")
+			templ.Execute(w, nil)
 			return
 		}
 
 		login := r.FormValue("login")
 		password := r.FormValue("password")
+		if len(login) == 0 || len(password) == 0{
+			templ := ParsePage("scripts/faild_input.html")
+			templ.Execute(w, nil)
+			return
+		}
+
 		_, err := db.Exec("INSERT INTO users (login, password) VALUES($1, $2)", Login, password)
 		if err != nil{
 			log.Println(err)
@@ -185,7 +200,7 @@ func registrationPage(w http.ResponseWriter, r *http.Request){
 }
 
 func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
-	if user.Login == "" {
+	if len(user.Login) == 0 {
 		Redirect("index.html", w)
 		return
 	}
@@ -201,6 +216,13 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 		}
 
 		request := strings.Split(r.FormValue("task"), " ")
+
+		if len(r.FormValue("task")) == 0{
+			templ := ParsePage("scripts/faild_input.html")
+			templ.Execute(w, nil)
+			return
+		}
+
 		date := request[0]
 		task := request[1]
 
@@ -229,21 +251,46 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 		Redirect("personal_account.html", w)
 	}
 	if r.Method == "POST" && r.FormValue("post") == "delete"{
+		if err := r.ParseForm(); err != nil{
+			log.Println(err)
+		}
 
 		id_str := r.FormValue("delete")
-		id, _ := strconv.Atoi(id_str)
-		_, err := db.Exec("DELETE FROM tasks WHERE id = $1", id)
-		if err != nil{
-			log.Println(err)
+
+		if len(id_str) == 0{
+			templ := ParsePage("scripts/faild_input.html")
+			templ.Execute(w, nil)
+			return
 		}
 
-		_, err = db.Exec("UPDATE tasks SET id = id - 1  WHERE id > $1", id)
-		if err != nil{
-			log.Println(err)
-		}
+		if id_str == "all"{
+			_, err := db.Exec("DELETE FROM tasks WHERE user_id = $1", user.ID)
+			if err != nil{
+				log.Println(err)
+			}
+			Redirect("personal_account.html", w)
+		}else {
+			id, _ := strconv.Atoi(id_str)
+			_, err := db.Exec("DELETE FROM tasks WHERE id = $1", id)
+			if err != nil {
+				log.Println(err)
+			}
 
-		Redirect("personal_account.html", w)
+			_, err = db.Exec("UPDATE tasks SET id = id - 1  WHERE id > $1", id)
+			if err != nil {
+				log.Println(err)
+			}
+
+			Redirect("personal_account.html", w)
+		}
 
 	}
 
+}
+
+func exitPage(w http.ResponseWriter, r *http.Request){
+	user = User{}
+	user.Port = port
+	templ := ParsePage("pages/exit.html")
+	templ.Execute(w, user)
 }
