@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style type="text/css">
+        #left{
+            display: inline-block;
+            vertical-align: top;
+            flex-wrap: nowrap;
+            width:50%;
+            height: auto;
+            background:#f1f1f1;
+            float:left;
+            margin: 0 15px 15px 0;
+            text-align:center;
+            padding: 10px;
+        }
+        body{
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            margin: 0;
+            padding: 0;
+            background: #8ecad5;
+            display: block;
+            height: 100px;
+        }
+        #header{
+            color: #46606a;
+        }
+    </style>
+    <meta charset="UTF-8">
+    <title>Personal account</title>
+</head>
+<body>
+<header>
+    <p id="header"><a href="http://localhost{{.Port}}/exit.html">Выход</a> </p>
+    <p id="header">Login: {{.Login}}</p>
+    <p id="header">ID: {{.ID}}</p>
+</header>
+
+    <div id="left">
+            {{range .Tasks}}
+                <p>{{.ID_task}}: {{.Date}} {{.Content}}</p>
+            {{end}}
+    </div>
+
+<form method="POST">
+    <input type="hidden" value="add" name="post">
+    <input type="text" placeholder="YYYY-MM-DD task" name="task">
+    <input type="submit" value="Add">
+</form>
+
+<form method="POST">
+    <input type="hidden" value="delete" name="post">
+    <input type="text" placeholder="ID" name="delete">
+    <input type="submit" value="Delete">
+</form>
+
+
+</body>
+</html>
