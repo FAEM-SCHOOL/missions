@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="df69fa62-57e0-4462-b613-acea020eb165" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Task-Manager-Web/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Task-Manager-Web/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task-Manager-Web/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/Task-Manager-Web/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Task-Manager-Web/pages/personal_account.html" beforeDir="false" afterPath="$PROJECT_DIR$/Task-Manager-Web/pages/personal_account.html" afterDir="false" />
     </list>
@@ -36,6 +54,29 @@
     <property name="go.sdk.automatically.set" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/Task-Manager-Web/.idea" />
+      <recent name="$PROJECT_DIR$/Task-Manager-Web/.idea/inspectionProfiles" />
+      <recent name="$PROJECT_DIR$/Task-Manager-Web" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="go build main.go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
+      <module name="missions" />
+      <working_directory value="$PROJECT_DIR$" />
+      <kind value="FILE" />
+      <filePath value="$PROJECT_DIR$/Task-Manager-Web/main.go" />
+      <package value="missions" />
+      <directory value="$PROJECT_DIR$" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Go Build.go build main.go" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
@@ -50,5 +91,48 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="176" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1596240962266">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="176" y="55" key="#com.intellij.execution.impl.EditConfigurationsDialog/70.27.1296.741@70.27.1296.741" timestamp="1596240962266" />
+    <state x="526" y="116" width="374" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1596237804280">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state x="526" y="116" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/70.27.1296.741@70.27.1296.741" timestamp="1596237804280" />
+    <state width="1250" height="215" key="GridCell.Tab.0.bottom" timestamp="1596244637447">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.0.bottom/70.27.1296.741@70.27.1296.741" timestamp="1596244637447" />
+    <state width="1250" height="215" key="GridCell.Tab.0.center" timestamp="1596244637446">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.0.center/70.27.1296.741@70.27.1296.741" timestamp="1596244637446" />
+    <state width="1250" height="215" key="GridCell.Tab.0.left" timestamp="1596244637444">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.0.left/70.27.1296.741@70.27.1296.741" timestamp="1596244637444" />
+    <state width="1250" height="215" key="GridCell.Tab.0.right" timestamp="1596244637447">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.0.right/70.27.1296.741@70.27.1296.741" timestamp="1596244637447" />
+    <state width="1250" height="215" key="GridCell.Tab.1.bottom" timestamp="1596244637451">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.bottom/70.27.1296.741@70.27.1296.741" timestamp="1596244637451" />
+    <state width="1250" height="215" key="GridCell.Tab.1.center" timestamp="1596244637449">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.center/70.27.1296.741@70.27.1296.741" timestamp="1596244637449" />
+    <state width="1250" height="215" key="GridCell.Tab.1.left" timestamp="1596244637448">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.left/70.27.1296.741@70.27.1296.741" timestamp="1596244637448" />
+    <state width="1250" height="215" key="GridCell.Tab.1.right" timestamp="1596244637450">
+      <screen x="70" y="27" width="1296" height="741" />
+    </state>
+    <state width="1250" height="215" key="GridCell.Tab.1.right/70.27.1296.741@70.27.1296.741" timestamp="1596244637450" />
   </component>
 </project>

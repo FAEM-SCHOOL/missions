@@ -56,12 +56,16 @@ func GetUser(login string) User {
 			break
 		}
 	}
+
+	user.Tasks = GetTasksOfUser(user.ID)
+	user.Port = port
+
 	return  user
 }
 
 func GetTasksOfUser(id int) []Task {
 	var tasks []Task
-	rows, err := db.Query("SELECT * FROM tasks")
+	rows, err := db.Query("SELECT * FROM tasks where user_id = $1", user.ID)
 	if err != nil{
 		panic(err)
 	}
@@ -154,6 +158,7 @@ func indexPage(w http.ResponseWriter, r *http.Request){
 
 		if UserIsExist(login) && GetUser(login).Password == password{
 			user = GetUser(login)
+			user.Tasks = GetTasksOfUser(user.ID)
 			user.Port = port
 			Redirect("personal_account.html", w)
 		} else {
@@ -200,12 +205,14 @@ func registrationPage(w http.ResponseWriter, r *http.Request){
 }
 
 func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
+
 	if len(user.Login) == 0 {
 		Redirect("index.html", w)
 		return
 	}
 
 	user.Tasks = GetTasksOfUser(user.ID)
+
 
 	templ := ParsePage("pages/personal_account.html")
 	templ.Execute(w, user)
@@ -226,7 +233,7 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 		date := request[0]
 		task := request[1]
 
-		tasks := GetTasksOfUser(user.ID)
+		tasks := user.Tasks
 		var id int
 		if len(tasks) >= 1 {
 			id = tasks[len(tasks) - 1].ID_task + 1
@@ -243,7 +250,7 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 		}
 
 
-		_, err = db.Exec("UPDATE tasks SET id = $1 WHERE id > $1", id)
+		_, err = db.Exec("UPDATE tasks SET id = $1 WHERE id > $1 AND user_id = $2", id, user.ID)
 		if err != nil {
 			log.Println(err)
 		}
@@ -254,7 +261,6 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 		if err := r.ParseForm(); err != nil{
 			log.Println(err)
 		}
-
 		id_str := r.FormValue("delete")
 
 		if len(id_str) == 0{
@@ -271,12 +277,12 @@ func personal_accountPage(w http.ResponseWriter, r *http.Request)  {
 			Redirect("personal_account.html", w)
 		}else {
 			id, _ := strconv.Atoi(id_str)
-			_, err := db.Exec("DELETE FROM tasks WHERE id = $1", id)
+			_, err := db.Exec("DELETE FROM tasks WHERE id = $1 AND user_id = $2", id, user.ID)
 			if err != nil {
 				log.Println(err)
 			}
 
-			_, err = db.Exec("UPDATE tasks SET id = id - 1  WHERE id > $1", id)
+			_, err = db.Exec("UPDATE tasks SET id = id - 1  WHERE id > $1 AND user_id = $2", id, user.ID)
 			if err != nil {
 				log.Println(err)
 			}

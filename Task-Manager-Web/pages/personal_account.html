@@ -39,17 +39,18 @@
     <p id="header">ID: {{.ID}}</p>
 </header>
 
-<div id="left">
- {{range .Tasks}}
-     <p>{{.ID_task}}: {{.Date}} {{.Content}}</p>
-    {{end}}
-</div>
+    <div id="left">
+            {{range .Tasks}}
+                <p>{{.ID_task}}: {{.Date}} {{.Content}}</p>
+            {{end}}
+    </div>
 
 <form method="POST">
     <input type="hidden" value="add" name="post">
     <input type="text" placeholder="YYYY-MM-DD task" name="task">
     <input type="submit" value="Add">
 </form>
+
 <form method="POST">
     <input type="hidden" value="delete" name="post">
     <input type="text" placeholder="ID" name="delete">
